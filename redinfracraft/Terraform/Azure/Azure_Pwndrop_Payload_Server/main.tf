@@ -11,8 +11,8 @@ terraform {
   }
 }
 
-/* 
-Before Executing this terraform script, you need to create one Service Principal with 
+/*
+Before Executing this terraform script, you need to create one Service Principal with
 Owner, User Access Administrator, User Administrator, Global Administrator Permissions.
 */
 
@@ -88,8 +88,9 @@ resource "azurerm_public_ip" "pip" {
   name                = "myPublicIP"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Dynamic"
-  domain_name_label   = "mypublicipdns12343131245325675" 
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  domain_name_label   = "mypublicipdns12343131245325675"
 }
 
 # 5. Create Network Interface
@@ -160,7 +161,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix     = "AzureFrontDoor.Backend"
     destination_address_prefix = "*"
     description               = "Allow inbound HTTP traffic using the Http tag"
-   
+
   }
 
   security_rule {
@@ -174,7 +175,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix     = "AzureFrontDoor.Backend"
     destination_address_prefix = "*"
     description               = "Allow inbound HTTPS traffic using the Https tag"
-  
+
   }
 
   security_rule {
@@ -218,5 +219,5 @@ output "destroy_infra" {
 **************************************************************
 | 🗑️	Command: redinfracraft.py destroy azure payload pwndrop |
 **************************************************************
-EOF 
+EOF
 }

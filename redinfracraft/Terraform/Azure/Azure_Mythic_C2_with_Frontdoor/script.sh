@@ -28,6 +28,7 @@ sudo apt-get install -y make
 sudo make
 
 sudo /home/azureuser/access/Mythic/mythic-cli install github https://github.com/MythicC2Profiles/http
+sudo /home/azureuser/access/Mythic/mythic-cli install github https://github.com/MythicAgents/forge
 sudo -E /home/azureuser/access/Mythic/mythic-cli install github https://github.com/MythicAgents/Apollo.git
 
 sudo /home/azureuser/access/Mythic/mythic-cli start

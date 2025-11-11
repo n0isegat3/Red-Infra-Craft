@@ -1,5 +1,13 @@
 #  Infrastructure Walkthroughs:
 
+**Microsoft Azure prerequisites:**
+
+- For vanilla Microsoft Azure Subscription you need to manually configure used Resource Providers.
+- Create Microsoft Entra ID App Registration and generate new client secret. Note the following values, you will need them later:
+  - App Registration: Application (client) ID
+  - App Registration Client Secret: Value
+- Add Subscription Contributor permissions on the Subscription for the created Service Principal (App Registration)
+
 **Common steps required to perform for each infrastructure deployment.**
 
 Before spinning any of the infra make sure you modify **terraform.auto.tfvars** and provide the following required details:
@@ -7,32 +15,32 @@ Before spinning any of the infra make sure you modify **terraform.auto.tfvars** 
 Location of **terraform.auto.tfvars** file: RedInfraCraft (V2) << Terraform << terraform.auto.tfvars
 
 - **subscription_id = <YOUR_SUBSCRIPTIO_ID>**
-  
+
   You need to enter your Azure Subscription ID here.
 
 - **tenant_id = <YOUR_TENANT_ID>**
-  
+
   You need to enter your Aure Tenant ID here.
-  
+
 - **client_id = <YOUR_CLIENT_ID>**
-  
-  You need to enter Service Account's Client ID here.
-  
+
+  You need to enter Service Account's Client ID here (App Registration Application (client) ID).
+
 - **client_secret = <YOUR_CLIENT_SECRET>**
-  
-  You need to enter Service Account's Client ID here.
+
+  You need to enter Service Account's Client ID here (App Registration Client Secret Value).
 
 - **vm_key_name = <VM_Secret_File_Name>**
-  
-  RedInfraCraft automates the retrieval of the secret PEM key file for your VM instances, ensuring a hassle-free experience. *To ensure uniqueness, you need to 
+
+  RedInfraCraft automates the retrieval of the secret PEM key file for your VM instances, ensuring a hassle-free experience. *To ensure uniqueness, you need to
   provide different name each time*. Remembering the PEM file name is essential as you'll need it frequently throughout your operations.
 
 **Once you make the required changes, you can spawn your infra, every architectures command you will find further in this document!! **
 
-After that you will see that your infra is deployed successfully. 
+After that you will see that your infra is deployed successfully.
 
 > [!NOTE]
-> Once the command is successfuly executed, you'll find the secret file (with the given name) in the same folder were you have deployed the tool inside the 
+> Once the command is successfuly executed, you'll find the secret file (with the given name) in the same folder were you have deployed the tool inside the
   respective infra's directory. Now, you need to connect the VM instance.
 
 1. **First limit the permissions of the secret file:**
@@ -178,7 +186,7 @@ After accessing Mythic, follow these steps to create a payload:
 3. In the "Domain" field, add the domain of the CloudFront distribution. You can obtain this domain from the management console of AWS.
 4. Set the "Callback port" to 443.
 5. Review your payload configuration.
-6. You can view your payload details and download it for use. 
+6. You can view your payload details and download it for use.
 
 These steps will help you create a payload in Mythic with the appropriate domain and callback port settings for your CloudFront distribution.
 
@@ -205,7 +213,7 @@ These steps will help you create a payload in Mythic with the appropriate domain
 - ```bash
   redinfracraft.py create azure payload pwndrop
   ```
-> [!NOTE] 
+> [!NOTE]
 > Perform Common necessary steps mentioned above
 
 - After making the ssh connection with VM instance, Check for the “pwndrop” directory, navigate into it:
